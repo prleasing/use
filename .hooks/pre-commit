@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Exit on any error
+set -euo pipefail
+
+npx lint-staged
+npm test

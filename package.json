@@ -1,0 +1,66 @@
+{
+	"name": "@prleasing/use",
+	"description": "Кастомные Vue 3 хуки",
+	"version": "1.0.0",
+	"keywords": [
+		"typescript",
+		"service",
+		"utility",
+		"hook",
+		"vue hook",
+		"vue ",
+		"vue 3"
+	],
+	"main": "dist/index.cjs.js",
+	"module": "dist/index.es.js",
+	"types": "dist/index.d.ts",
+	"jsdelivr": "dist/index.iife.js",
+	"files": [
+		"dist",
+		"README.md"
+	],
+	"repository": {
+		"url": "https://github.com/prleasing/use"
+	},
+	"homepage": "https://prleasing.github.io/use",
+	"license": "Apache-2.0",
+	"maintainers": [
+		"Yakin Nikita <taknepoidet@yandex.ru>"
+	],
+	"scripts": {
+		"preinstall": "git config core.hooksPath ./.hooks",
+		"dev": "vite build --watch",
+		"build": "tsc && vite build",
+		"eslint": "eslint --fix .",
+		"prettier": "prettier --ignore-unknown --write .",
+		"beautifier": "npm run eslint && npm run prettier",
+		"prepublish": "npm run docs && npm run build"
+	},
+	"devDependencies": {
+		"@taknepoidet-config/eslint-config": "^1.9.2",
+		"@taknepoidet-config/prettier": "^1.9.1",
+		"@types/luxon": "^2.3.2",
+		"@vitejs/plugin-vue": "^2.3.3",
+		"eslint": "^8.18.0",
+		"lint-staged": "^13.0.3",
+		"prettier": "^2.7.1",
+		"prettier-plugin-jsdoc": "^0.3.38",
+		"vite": "^2.9.9",
+		"vite-plugin-dts": "^1.2.0"
+	},
+	"dependencies": {
+		"@prleasing/utility": "^1.0.1",
+		"gsap": "^3.10.4",
+		"luxon": "^2.4.0",
+		"vue": "3.2.36",
+		"core-js": "^3.23.3",
+		"@vue/reactivity": "3.2.37"
+	},
+	"lint-staged": {
+		"{src,test}/**/*.ts": "eslint"
+	},
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	}
+}
