@@ -1,7 +1,7 @@
 {
 	"name": "@prleasing/use",
 	"description": "Кастомные Vue 3 хуки",
-	"version": "1.1.1",
+	"version": "1.1.3",
 	"keywords": [
 		"typescript",
 		"service",
@@ -28,13 +28,13 @@
 		"Yakin Nikita <taknepoidet@yandex.ru>"
 	],
 	"scripts": {
-		"preinstall": "git config core.hooksPath ./.hooks",
+		"init": "git config core.hooksPath ./.hooks",
 		"dev": "vite build --watch",
 		"build": "tsc && vite build",
 		"eslint": "eslint --fix .",
 		"prettier": "prettier --ignore-unknown --write .",
 		"beautifier": "npm run eslint && npm run prettier",
-		"prepublish": "npm run build"
+		"prepublishOnly": "npm run build"
 	},
 	"devDependencies": {
 		"@taknepoidet-config/eslint-config": "^1.9.2",
@@ -49,7 +49,7 @@
 		"vite-plugin-dts": "^1.2.0"
 	},
 	"dependencies": {
-		"@prleasing/utility": "^1.1.0",
+		"@prleasing/utility": "^1.1.2",
 		"gsap": "^3.10.4",
 		"luxon": "^2.4.0",
 		"core-js": "^3.23.3"

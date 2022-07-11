@@ -1,4 +1,5 @@
 import { computed, ComputedRef, ref, Ref, watch } from 'vue';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { UnwrapNestedRefs } from '@vue/reactivity';
 import { useRef } from '../utils';
 import { useIntersectionObserver } from '../observer';

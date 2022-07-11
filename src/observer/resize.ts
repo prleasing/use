@@ -12,14 +12,13 @@ export function useResizeObserver<T extends HTMLElement>(
 	cb: (entry: ResizeObserverEntry) => void,
 	options: Partial<ResizeObserverOptions> = {}
 ) {
+	let observer: ResizeObserver | null = null;
 
-	let observer: ResizeObserver| null =  null;
 	if (typeof window !== 'undefined' && ResizeObserver) {
 		observer = new ResizeObserver(([entry]) => {
 			cb(entry);
 		});
 	}
-
 
 	onMounted(async () => {
 		await nextTick();
