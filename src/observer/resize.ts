@@ -12,19 +12,24 @@ export function useResizeObserver<T extends HTMLElement>(
 	cb: (entry: ResizeObserverEntry) => void,
 	options: Partial<ResizeObserverOptions> = {}
 ) {
-	const observer = new ResizeObserver(([entry]) => {
-		cb(entry);
-	});
+
+	let observer: ResizeObserver| null =  null;
+	if (typeof window !== 'undefined' && ResizeObserver) {
+		observer = new ResizeObserver(([entry]) => {
+			cb(entry);
+		});
+	}
+
 
 	onMounted(async () => {
 		await nextTick();
 		if ($el.value !== null) {
-			observer.observe($el.value, {
+			observer?.observe($el.value, {
 				...options
 			});
 		}
 	});
 	onBeforeMount(() => {
-		observer.disconnect();
+		observer?.disconnect();
 	});
 }

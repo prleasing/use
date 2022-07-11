@@ -1,4 +1,4 @@
-import { ref } from '@vue/reactivity';
+import { ref } from 'vue';
 
 export async function useGeolocation() {
 	const location = ref<GeolocationPosition | null>(null);

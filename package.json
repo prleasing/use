@@ -1,7 +1,7 @@
 {
 	"name": "@prleasing/use",
 	"description": "Кастомные Vue 3 хуки",
-	"version": "1.0.0",
+	"version": "1.1.1",
 	"keywords": [
 		"typescript",
 		"service",
@@ -34,7 +34,7 @@
 		"eslint": "eslint --fix .",
 		"prettier": "prettier --ignore-unknown --write .",
 		"beautifier": "npm run eslint && npm run prettier",
-		"prepublish": "npm run docs && npm run build"
+		"prepublish": "npm run build"
 	},
 	"devDependencies": {
 		"@taknepoidet-config/eslint-config": "^1.9.2",
@@ -49,12 +49,14 @@
 		"vite-plugin-dts": "^1.2.0"
 	},
 	"dependencies": {
-		"@prleasing/utility": "^1.0.1",
+		"@prleasing/utility": "^1.1.0",
 		"gsap": "^3.10.4",
 		"luxon": "^2.4.0",
-		"vue": "3.2.36",
-		"core-js": "^3.23.3",
-		"@vue/reactivity": "3.2.37"
+		"core-js": "^3.23.3"
+	},
+	"peerDependencies": {
+		"vue": "^3.0.0",
+		"vue-router": "^4.0.0"
 	},
 	"lint-staged": {
 		"{src,test}/**/*.ts": "eslint"
