@@ -15,8 +15,6 @@ let scrollPosition = 0;
 export function useBodyOverflow(): OverflowBodyReturn {
 	const scrollbarWidth = computed(() => window.innerWidth - document.documentElement.clientWidth);
 
-
-
 	if (typeof window !== 'undefined') {
 		useEventListener(window, 'resize', () => {
 			document.documentElement.style.setProperty('--height', `${window.innerHeight}px`);

@@ -1,8 +1,10 @@
-import { resolve } from 'path';
+import {isAbsolute, resolve} from 'path';
 import dts from 'vite-plugin-dts';
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 // @ts-ignore
 import vue from '@vitejs/plugin-vue';
+// @ts-ignore
+import { visualizer } from "rollup-plugin-visualizer";
 
 export default defineConfig({
 	define: {
@@ -19,16 +21,20 @@ export default defineConfig({
 		lib: {
 			entry: resolve(__dirname, 'src/index.ts'),
 			name: 'use',
-			formats: ['es', 'cjs', 'iife'],
+			formats: ['es', 'cjs'],
 			fileName: (format) => `index.${format}.js`
 		},
 		minify: 'terser',
 		rollupOptions: {
-			external: ['vue'],
-			output: {
-				globals: {
-					vue: 'Vue'
-				}
+			plugins: [
+				visualizer({
+					emitFile: true,
+					file: 'stats.html'
+				})
+			],
+			preserveModules: true,
+			external: (id: string) => {
+				return !id.startsWith(".") && !isAbsolute(id)
 			}
 		}
 	}

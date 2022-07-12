@@ -1,7 +1,7 @@
 import { computed, ref, Ref, watch } from 'vue';
-import gsap from 'gsap';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { ComputedRef } from '@vue/reactivity';
+import type { ComputedRef } from '@vue/reactivity';
+
+const gsapAsync = () => import(/* webpackChunkName: "gsap" */ 'gsap');
 
 export function useTweenNumber<T extends number>(
 	currentValue: Ref<T> | ComputedRef<T>,
@@ -17,12 +17,14 @@ export function useTweenNumber<T extends number>(
 	});
 
 	watch(currentValue, (value) => {
-		gsap.to(tweenValue, {
-			duration: 0.2,
-			value,
-			onUpdate() {
-				onUpdate(parseInt(animatedTeenValue.value, 10));
-			}
+		gsapAsync().then(({ default: gsap }) => {
+			gsap.to(tweenValue, {
+				duration: 0.2,
+				value,
+				onUpdate() {
+					onUpdate(parseInt(animatedTeenValue.value, 10));
+				}
+			});
 		});
 	});
 }
