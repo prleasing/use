@@ -1,10 +1,10 @@
-import {isAbsolute, resolve} from 'path';
+import { isAbsolute, resolve } from 'path';
 import dts from 'vite-plugin-dts';
-import {defineConfig} from 'vite';
+import { defineConfig } from 'vite';
 // @ts-ignore
 import vue from '@vitejs/plugin-vue';
 // @ts-ignore
-import { visualizer } from "rollup-plugin-visualizer";
+import { visualizer } from 'rollup-plugin-visualizer';
 
 export default defineConfig({
 	define: {
@@ -26,15 +26,10 @@ export default defineConfig({
 		},
 		minify: 'terser',
 		rollupOptions: {
-			plugins: [
-				visualizer({
-					emitFile: true,
-					file: 'stats.html'
-				})
-			],
 			preserveModules: true,
+			// external: ['vue'],
 			external: (id: string) => {
-				return !id.startsWith(".") && !isAbsolute(id)
+				return !id.startsWith('.') && !isAbsolute(id);
 			}
 		}
 	}

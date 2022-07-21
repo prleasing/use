@@ -1,4 +1,5 @@
 module.exports = {
+	root: true,
 	extends: ['@taknepoidet-config/eslint-config'],
 	settings: {
 		'import/resolver': {

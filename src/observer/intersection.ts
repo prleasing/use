@@ -12,12 +12,15 @@ export function useIntersectionObserver<T extends HTMLElement>(
 	cb: (entry: IntersectionObserverEntry, observer: IntersectionObserver) => void,
 	options: Partial<IntersectionObserverInit> = {}
 ) {
-	const observer = new IntersectionObserver(([entry], observer) => {
-		cb(entry, observer);
-	}, options);
+	let observer: IntersectionObserver | null = null;
+	if (typeof window !== 'undefined' && IntersectionObserver) {
+		observer = new IntersectionObserver(([entry], observer) => {
+			cb(entry, observer);
+		}, options);
+	}
 
 	onMounted(() => {
-		if ($el.value !== null) {
+		if (observer && $el.value !== null) {
 			observer.observe($el.value);
 		}
 	});
@@ -29,7 +32,7 @@ export function useIntersectionObserver<T extends HTMLElement>(
 
 	return {
 		disconnect() {
-			return observer.disconnect();
+			return observer?.disconnect();
 		}
 	};
 }
