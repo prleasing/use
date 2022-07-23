@@ -29,7 +29,7 @@ export function useCounter(_params: Partial<Counter> = {}) {
 		_params
 	);
 
-	const [current, setCurrent] = useState(params.start);
+	const [current, setCurrent] = useState<number>(params.start);
 
 	function increment() {
 		setCurrent(clamp(params.min, current.value + 1, params.max));
