@@ -13,6 +13,7 @@ export function useIntersectionObserver<T extends HTMLElement>(
 	options: Partial<IntersectionObserverInit> = {}
 ) {
 	let observer: IntersectionObserver | null = null;
+
 	if (typeof window !== 'undefined' && IntersectionObserver) {
 		observer = new IntersectionObserver(([entry], observer) => {
 			cb(entry, observer);
