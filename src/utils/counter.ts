@@ -39,7 +39,7 @@ export function useCounter(_params: Partial<Counter> = {}) {
 	}
 
 	function reset() {
-		setCurrent(0);
+		setCurrent(params.start);
 	}
 	return { current, increment, decrement, reset };
 }

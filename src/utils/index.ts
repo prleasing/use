@@ -8,3 +8,4 @@ export * from './geolocation';
 export * from './localstorage';
 export * from './interval';
 export * from './mount';
+export * from './bounding-client-rect';

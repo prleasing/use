@@ -1,4 +1,4 @@
-import { onBeforeUnmount, onMounted, Ref } from 'vue';
+import { nextTick, onBeforeUnmount, onBeforeUpdate, onMounted, onUpdated, Ref } from 'vue';
 
 /**
  * Слежка за появлением элемента в области видимости документа
@@ -13,26 +13,39 @@ export function useIntersectionObserver<T extends HTMLElement>(
 	options: Partial<IntersectionObserverInit> = {}
 ) {
 	let observer: IntersectionObserver | null = null;
+
 	if (typeof window !== 'undefined' && IntersectionObserver) {
 		observer = new IntersectionObserver(([entry], observer) => {
 			cb(entry, observer);
 		}, options);
 	}
 
-	onMounted(() => {
+	function observe() {
 		if (observer && $el.value !== null) {
 			observer.observe($el.value);
 		}
+	}
+	onMounted(() => {
+		nextTick().then(observe);
 	});
-	onBeforeUnmount(() => {
+
+	onUpdated(() => {
+		nextTick().then(observe);
+	});
+
+	function disconnect() {
 		if (observer) {
 			observer.disconnect();
 		}
+	}
+	onBeforeUpdate(() => {
+		nextTick().then(disconnect);
+	});
+	onBeforeUnmount(() => {
+		nextTick().then(disconnect);
 	});
 
 	return {
-		disconnect() {
-			return observer?.disconnect();
-		}
+		disconnect
 	};
 }
